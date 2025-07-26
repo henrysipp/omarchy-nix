@@ -9,7 +9,7 @@ lib: {
       description = "Main user's email address";
     };
     theme = lib.mkOption {
-      type = lib.types.enum [
+      type = lib.types.either (lib.types.enum [
         "tokyo-night"
         "kanagawa"
         "everforest"
@@ -17,9 +17,27 @@ lib: {
         "nord"
         "gruvbox"
         "gruvbox-light"
-      ];
+        "custom"
+      ]) lib.types.str;
       default = "tokyo-night";
       description = "Theme to use for Omarchy configuration";
+    };
+    customTheme = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          wallpaperPath = lib.mkOption {
+            type = lib.types.path;
+            description = "Path to the wallpaper image to extract colors from";
+          };
+          variant = lib.mkOption {
+            type = lib.types.enum [ "light" "dark" ];
+            default = "dark";
+            description = "Color scheme variant to extract (light or dark)";
+          };
+        };
+      };
+      default = {};
+      description = "Custom theme configuration when theme is set to 'custom'";
     };
     primary_font = lib.mkOption {
       type = lib.types.str;

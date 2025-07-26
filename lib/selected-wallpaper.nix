@@ -21,7 +21,12 @@ config: let
     ];
   };
 
-  selected_wallpaper = builtins.elemAt (wallpapers.${cfg.theme}) 0;
+  # Handle custom wallpaper path
+  wallpaper_path = if cfg.theme == "custom"
+    then toString cfg.customTheme.wallpaperPath
+    else let
+      selected_wallpaper = builtins.elemAt (wallpapers.${cfg.theme}) 0;
+    in "~/Pictures/Wallpapers/${selected_wallpaper}";
 in {
-  wallpaper_path = "~/Pictures/Wallpapers/${selected_wallpaper}";
+  inherit wallpaper_path;
 }

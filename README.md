@@ -56,7 +56,34 @@ Once ready, add this flake to your system configuration, you'll also need [home-
 
 I've specified some basic configuration options to help you get started with initial setup, as well as some simple overrides for common configuration settings I found I was modifying often. These are likely subject to change with future versions as I iron things out.
 
-Refer to [the root configuration](https://github.com/henrysipp/omarchy-nix/blob/main/config.nix) file for more information on what options are available. 
+Refer to [the root configuration](https://github.com/henrysipp/omarchy-nix/blob/main/config.nix) file for more information on what options are available.
+
+### Themes
+
+Omarchy-nix includes several predefined themes:
+- `tokyo-night` (default)
+- `kanagawa`
+- `everforest`
+- `catppuccin`
+- `nord`
+- `gruvbox`
+- `gruvbox-light`
+
+You can also generate a custom theme from any wallpaper image:
+
+```nix
+{
+  omarchy = {
+    theme = "custom";
+    customTheme = {
+      wallpaperPath = ./path/to/your/wallpaper.png;
+      variant = "dark"; # or "light" for light themes
+    };
+  };
+}
+```
+
+This will automatically extract colors from your wallpaper and generate a matching color scheme for all Omarchy applications (terminal, editor, launcher, etc.). 
 
 ## License
 

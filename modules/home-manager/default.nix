@@ -7,7 +7,19 @@ inputs: {
   packages = import ../packages.nix {inherit pkgs lib; exclude_packages = config.omarchy.exclude_packages;};
 
   themes = import ../themes.nix;
-  selectedTheme = themes.${config.omarchy.theme};
+  
+  # Handle theme selection - either predefined or custom
+  selectedTheme = if config.omarchy.theme == "custom"
+    then themes.custom
+    else themes.${config.omarchy.theme};
+  
+  # Generate color scheme - either from predefined or from wallpaper
+  generatedColorScheme = if config.omarchy.theme == "custom"
+    then (inputs.nix-colors.lib.contrib { inherit pkgs; }).colorSchemeFromPicture {
+      path = config.omarchy.customTheme.wallpaperPath;
+      variant = config.omarchy.customTheme.variant;
+    }
+    else null;
 in {
   imports = [
     (import ./hyprland.nix inputs)
@@ -35,7 +47,9 @@ in {
   };
   home.packages = packages.homePackages;
 
-  colorScheme = inputs.nix-colors.colorSchemes.${selectedTheme.base16-theme};
+  colorScheme = if config.omarchy.theme == "custom"
+    then generatedColorScheme
+    else inputs.nix-colors.colorSchemes.${selectedTheme.base16-theme};
 
   gtk = {
     enable = true;
