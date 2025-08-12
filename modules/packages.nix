@@ -1,4 +1,4 @@
-{pkgs, lib, exclude_packages ? []}: 
+{pkgs, lib, exclude_packages ? []}:
 let
   # Essential Hyprland packages - cannot be excluded
   hyprlandPackages = with pkgs; [
@@ -47,11 +47,6 @@ let
     vlc
     signal-desktop
 
-    # Commercial GUIs
-    typora
-    dropbox
-    spotify
-
     # Development tools
     github-desktop
     gh
@@ -59,6 +54,10 @@ let
     # Containers
     docker-compose
     ffmpeg
+  ] ++ lib.optionals (pkgs.system == "x86_64-linux") [
+    typora
+    dropbox
+    spotify
   ];
 
   # Only allow excluding discretionary packages to prevent breaking the system
