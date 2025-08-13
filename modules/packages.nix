@@ -29,6 +29,7 @@ let
     gnome-themes-extra
     pavucontrol
     wl-clipboard
+    glib
   ];
 
   # Essential system packages - cannot be excluded
@@ -49,6 +50,7 @@ let
     unzip
     wget
     gnumake
+    glib
   ];
 
   # Discretionary packages - can be excluded by user
