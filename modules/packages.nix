@@ -94,5 +94,8 @@ in {
 
   homePackages = [
     satty-latest
+    pkgs.slurp
+    pkgs.wl-screenrec
+    pkgs.evince
   ];
 }
