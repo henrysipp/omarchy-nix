@@ -22,7 +22,8 @@ config: let
   };
 
   # Handle wallpaper path for generated themes and overrides
-  wallpaper_path = if (cfg.theme == "generated_light" || cfg.theme == "generated_dark") || (cfg.theme_overrides.wallpaper_path != null)
+  wallpaper_path =
+    if (cfg.theme == "generated_light" || cfg.theme == "generated_dark") || (cfg.theme_overrides.wallpaper_path != null)
     then toString cfg.theme_overrides.wallpaper_path
     else let
       selected_wallpaper = builtins.elemAt (wallpapers.${cfg.theme}) 0;

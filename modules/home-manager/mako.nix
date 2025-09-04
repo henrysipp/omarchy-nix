@@ -7,6 +7,5 @@
 in {
   services.mako = {
     enable = true;
-
   };
 }

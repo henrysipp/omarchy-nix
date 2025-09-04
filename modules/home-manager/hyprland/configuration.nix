@@ -14,7 +14,7 @@ in {
     ./looknfeel.nix
     ./windows.nix
   ];
-  wayland.windowManager.hyprland.settings = {    
+  wayland.windowManager.hyprland.settings = {
     source = "~/.local/share/omarchy/default/hypr/bindings.conf";
 
     # Default applications
@@ -25,8 +25,6 @@ in {
     "$passwordManager" = lib.mkDefault "uwsm app --1password";
     "$messenger" = lib.mkDefault "uwsm app -- signal-desktop";
     "$webapp" = lib.mkDefault "$browser --app";
-
-    
 
     monitor = cfg.monitors;
   };

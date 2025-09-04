@@ -29,7 +29,7 @@
     base16-theme = "gruvbox-light-medium";
     vscode-theme = "Gruvbox Light Medium";
   };
-  
+
   "custom" = {
     # Custom themes don't have predefined base16 schemes (generated dynamically)
     # VSCode theme fallback for custom color schemes

@@ -5,7 +5,10 @@
   ...
 }: let
   cfg = config.omarchy;
-  packages = import ../packages.nix {inherit pkgs lib; exclude_packages = cfg.exclude_packages;};
+  packages = import ../packages.nix {
+    inherit pkgs lib;
+    exclude_packages = cfg.exclude_packages;
+  };
 in {
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
@@ -43,5 +46,4 @@ in {
   systemd.tmpfiles.rules = [
     "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash"
   ];
-
 }

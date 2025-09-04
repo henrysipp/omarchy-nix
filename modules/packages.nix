@@ -1,5 +1,8 @@
-{pkgs, lib, exclude_packages ? []}: 
-let
+{
+  pkgs,
+  lib,
+  exclude_packages ? [],
+}: let
   # Custom satty package using the latest source from GitHub
   # The default version of satty is 0.18.1, doesn't work with omarchy-cmd-screenshot
   # it is missing --actions-on-enter but has --action-on-enter

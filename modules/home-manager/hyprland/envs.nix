@@ -13,40 +13,38 @@
     "__GLX_VENDOR_LIBRARY_NAME,nvidia"
   ];
 in {
-  home.file."${config.xdg.configHome}/uwsm/env".text = ''
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
+  # home.file."${config.xdg.configHome}/uwsm/env".text = ''
+  #       GDK_SCALE=${toString cfg.scale}
 
-        # Cursor theme
-        "XCURSOR_THEME,Adwaita"
-        "HYPRCURSOR_THEME,Adwaita"
+  #       XCURSOR_SIZE=24
+  #       HYPRCURSOR_SIZE=24
 
-        # Force all apps to use Wayland
-        "GDK_BACKEND,wayland"
-        "QT_QPA_PLATFORM,wayland"
-        "QT_STYLE_OVERRIDE,kvantum"
-        "SDL_VIDEODRIVER,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-        "OZONE_PLATFORM,wayland"
+  #       # Cursor theme
+  #       XCURSOR_THEME=Adwaita
+  #       HYPRCURSOR_THEME=Adwaita
 
-        # Make Chromium use XCompose and all Wayland
-        "CHROMIUM_FLAGS,\"--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4\""
+  #       # Force all apps to use Wayland
+  #       GDK_BACKEND=wayland
+  #       QT_QPA_PLATFORM=wayland
+  #       QT_STYLE_OVERRIDE=kvantum
+  #       SDL_VIDEODRIVER=wayland
+  #       MOZ_ENABLE_WAYLAND=1
+  #       ELECTRON_OZONE_PLATFORM_HINT=wayland
+  #       OZONE_PLATFORM=wayland
 
-        # Make .desktop files available for wofi
-        "XDG_DATA_DIRS,$XDG_DATA_DIRS:$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share"
+  #       # Make Chromium use XCompose and all Wayland
+  #       CHROMIUM_FLAGS="--enable-features=UseOzonePlatform --ozone-platform=wayland --gtk-version=4"
 
-        # Use XCompose file
-        "XCOMPOSEFILE,~/.XCompose"
-        "EDITOR,nvim"
-        
-        # GTK theme
-        "GTK_THEME,${if cfg.theme == "generated_light" then "Adwaita" else "Adwaita:dark"}"
-  '';
-  home.file."${config.xdg.configHome}/uwsm/env-hyprland".text = ''
-    "HYPRCURSOR_SIZE,24"
-    "HYPRCURSOR_THEME,Adwaita"
-  '';
+  #       # Make .desktop files available for wofi
+  #       XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share
+
+  #       # Use XCompose file
+  #       XCOMPOSEFILE=~/.XCompose
+  #       EDITOR=nvim
+
+  #       # GTK theme
+  #       GTK_THEME=${if cfg.theme == "generated_light" then "Adwaita" else "Adwaita:dark"}
+  # '';
 
   wayland.windowManager.hyprland.settings = {
     # Environment variables
@@ -81,9 +79,13 @@ in {
         # Use XCompose file
         "XCOMPOSEFILE,~/.XCompose"
         "EDITOR,nvim"
-        
+
         # GTK theme
-        "GTK_THEME,${if cfg.theme == "generated_light" then "Adwaita" else "Adwaita:dark"}"
+        "GTK_THEME,${
+          if cfg.theme == "generated_light"
+          then "Adwaita"
+          else "Adwaita:dark"
+        }"
 
         # Podman compatibility. Probably need to add cfg.env?
         # "DOCKER_HOST,unix://$XDG_RUNTIME_DIR/podman/podman.sock"

@@ -10,7 +10,7 @@ in {
       cfg.quick_app_bindings
       ++ [
         "SUPER, Backspace, killactive,"
-        
+
         "SUPER, comma, workspace, -1"
         "SUPER, period, workspace, +1"
 
