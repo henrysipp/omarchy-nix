@@ -10,18 +10,17 @@ in {
   programs.vscode = {
     enable = true;
     profiles.default = {
-
-      # This is actually turning out to be super annoying whenever I need 
+      # This is actually turning out to be super annoying whenever I need
       # to change settings on the fly. Disabling until I have time to research.
       # In the meantime themes are broken
       # userSettings =
-        # {
-        #   "workbench.colorTheme" = theme.vscode-theme;
-        #   "vim.useCtrlKeys" = false;
-        #   "editor.minimap.enabled" = false;
-        # }
-        
-        # // cfg.vscode_settings;
+      # {
+      #   "workbench.colorTheme" = theme.vscode-theme;
+      #   "vim.useCtrlKeys" = false;
+      #   "editor.minimap.enabled" = false;
+      # }
+
+      # // cfg.vscode_settings;
 
       extensions = with pkgs.vscode-extensions;
         [
