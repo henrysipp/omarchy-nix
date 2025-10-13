@@ -1,9 +1,11 @@
-inputs: {
+inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   palette = config.colorScheme.palette;
   convert = inputs.nix-colors.lib.conversions.hexToRGBString;
   selected_wallpaper_path = (import ../../lib/selected-wallpaper.nix config).wallpaper_path;
@@ -12,7 +14,8 @@ inputs: {
   surfaceRgb = "rgb(${convert ", " palette.base02})";
   foregroundRgb = "rgb(${convert ", " palette.base05})";
   foregroundMutedRgb = "rgb(${convert ", " palette.base04})";
-in {
+in
+{
   programs.hyprlock = {
     enable = true;
     settings = {

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -7,11 +8,11 @@
       plugins = [
         {
           name = "plugins/git";
-          tags = [from:oh-my-zsh];
+          tags = [ "from:oh-my-zsh" ];
         }
         {
           name = "fdellwing/zsh-bat";
-          tags = [as:command];
+          tags = [ "as:command" ];
         }
       ];
     };

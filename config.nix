@@ -33,7 +33,7 @@ lib: {
           };
         };
       };
-      default = {};
+      default = { };
       description = "Theme overrides including wallpaper path for generated themes";
     };
     primary_font = lib.mkOption {
@@ -42,11 +42,11 @@ lib: {
     };
     vscode_settings = lib.mkOption {
       type = lib.types.attrs;
-      default = {};
+      default = { };
     };
     monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
     };
     scale = lib.mkOption {
       type = lib.types.int;
@@ -80,7 +80,7 @@ lib: {
     };
     exclude_packages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = [];
+      default = [ ];
       description = "Packages to exclude from the default system packages";
     };
   };

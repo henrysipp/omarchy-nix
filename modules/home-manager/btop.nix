@@ -2,10 +2,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.omarchy;
   palette = config.colorScheme.palette;
-in {
+in
+{
   home.file = {
     ".config/btop/themes/${cfg.theme}.theme" = {
       text = ''

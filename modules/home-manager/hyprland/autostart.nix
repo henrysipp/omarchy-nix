@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       # "hypridle & mako & waybar & fcitx5"

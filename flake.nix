@@ -9,50 +9,56 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    hyprland,
-    nix-colors,
-    home-manager,
-  }: {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      hyprland,
+      nix-colors,
+      home-manager,
+    }:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
 
-    nixosModules = {
-      default = {
-        config,
-        lib,
-        pkgs,
-        ...
-      }: {
-        imports = [
-          (import ./modules/nixos/default.nix inputs)
-        ];
+      nixosModules = {
+        default =
+          {
+            config,
+            lib,
+            pkgs,
+            ...
+          }:
+          {
+            imports = [
+              (import ./modules/nixos/default.nix inputs)
+            ];
 
-        options.omarchy = (import ./config.nix lib).omarchyOptions;
-        config = {
-          nixpkgs.config.allowUnfree = true;
-        };
+            options.omarchy = (import ./config.nix lib).omarchyOptions;
+            config = {
+              nixpkgs.config.allowUnfree = true;
+            };
+          };
+      };
+
+      homeManagerModules = {
+        default =
+          {
+            config,
+            lib,
+            pkgs,
+            osConfig ? { },
+            ...
+          }:
+          {
+            imports = [
+              nix-colors.homeManagerModules.default
+              (import ./modules/home-manager/default.nix inputs)
+            ];
+            options.omarchy = (import ./config.nix lib).omarchyOptions;
+            config = lib.mkIf (osConfig ? omarchy) {
+              omarchy = osConfig.omarchy;
+            };
+          };
       };
     };
-
-    homeManagerModules = {
-      default = {
-        config,
-        lib,
-        pkgs,
-        osConfig ? {},
-        ...
-      }: {
-        imports = [
-          nix-colors.homeManagerModules.default
-          (import ./modules/home-manager/default.nix inputs)
-        ];
-        options.omarchy = (import ./config.nix lib).omarchyOptions;
-        config = lib.mkIf (osConfig ? omarchy) {
-          omarchy = osConfig.omarchy;
-        };
-      };
-    };
-  };
 }

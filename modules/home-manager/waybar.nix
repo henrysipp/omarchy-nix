@@ -1,13 +1,16 @@
-inputs: {
+inputs:
+{
   config,
   pkgs,
   ...
-}: let
+}:
+let
   palette = config.colorScheme.palette;
   convert = inputs.nix-colors.lib.conversions.hexToRGBString;
   backgroundRgb = "rgb(${convert ", " palette.base00})";
   foregroundRgb = "rgb(${convert ", " palette.base05})";
-in {
+in
+{
   home.file = {
     ".config/waybar/" = {
       source = ../../config/waybar;
@@ -68,11 +71,11 @@ in {
             active = "󱓻";
           };
           persistent-workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "4" = [];
-            "5" = [];
+            "1" = [ ];
+            "2" = [ ];
+            "3" = [ ];
+            "4" = [ ];
+            "5" = [ ];
           };
         };
         cpu = {
@@ -86,7 +89,13 @@ in {
           tooltip = false;
         };
         network = {
-          format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
+          format-icons = [
+            "󰤯"
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
           format = "{icon}";
           format-wifi = "{icon}";
           format-ethernet = "󰀂";
@@ -155,7 +164,9 @@ in {
           on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; # Updated command
           max-volume = 150; # Optional: allow volume over 100%
         };
-        tray = {spacing = 13;};
+        tray = {
+          spacing = 13;
+        };
         power-profiles-daemon = {
           format = "{icon}";
           tooltip-format = "Power profile: {profile}";

@@ -1,4 +1,8 @@
-{pkgs, lib, exclude_packages ? []}:
+{
+  pkgs,
+  lib,
+  exclude_packages ? [ ],
+}:
 let
   # Essential Hyprland packages - cannot be excluded
   hyprlandPackages = with pkgs; [
@@ -33,37 +37,41 @@ let
   ];
 
   # Discretionary packages - can be excluded by user
-  discretionaryPackages = with pkgs; [
-    # TUIs
-    lazygit
-    lazydocker
-    btop
-    powertop
-    fastfetch
+  discretionaryPackages =
+    with pkgs;
+    [
+      # TUIs
+      lazygit
+      lazydocker
+      btop
+      powertop
+      fastfetch
 
-    # GUIs
-    chromium
-    obsidian
-    vlc
-    signal-desktop
+      # GUIs
+      chromium
+      obsidian
+      vlc
+      signal-desktop
 
-    # Development tools
-    github-desktop
-    gh
+      # Development tools
+      github-desktop
+      gh
 
-    # Containers
-    docker-compose
-    ffmpeg
-  ] ++ lib.optionals (pkgs.system == "x86_64-linux") [
-    typora
-    dropbox
-    spotify
-  ];
+      # Containers
+      docker-compose
+      ffmpeg
+    ]
+    ++ lib.optionals (pkgs.system == "x86_64-linux") [
+      typora
+      dropbox
+      spotify
+    ];
 
   # Only allow excluding discretionary packages to prevent breaking the system
   filteredDiscretionaryPackages = lib.lists.subtractLists exclude_packages discretionaryPackages;
   allSystemPackages = hyprlandPackages ++ systemPackages ++ filteredDiscretionaryPackages;
-in {
+in
+{
   # Regular packages
   systemPackages = allSystemPackages;
 

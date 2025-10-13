@@ -3,10 +3,15 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.omarchy;
-  packages = import ../packages.nix {inherit pkgs lib; exclude_packages = cfg.exclude_packages;};
-in {
+  packages = import ../packages.nix {
+    inherit pkgs lib;
+    exclude_packages = cfg.exclude_packages;
+  };
+in
+{
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.pipewire = {

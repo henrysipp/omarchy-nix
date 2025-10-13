@@ -2,10 +2,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.omarchy;
   palette = config.colorScheme.palette;
-in {
+in
+{
   programs.ghostty = {
     enable = true;
     settings = {
