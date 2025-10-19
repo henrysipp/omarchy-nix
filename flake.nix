@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    inputs.nixvim.url = "github:nix-community/nixvim";
   };
   outputs =
     inputs@{
@@ -16,6 +17,7 @@
       hyprland,
       nix-colors,
       home-manager,
+      nixvim,
     }:
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
@@ -52,6 +54,7 @@
           {
             imports = [
               nix-colors.homeManagerModules.default
+              nixvim.homeModules.nixvim
               (import ./modules/home-manager/default.nix inputs)
             ];
             options.omarchy = (import ./config.nix lib).omarchyOptions;

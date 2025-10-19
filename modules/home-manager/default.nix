@@ -41,6 +41,7 @@ in
     (import ./direnv.nix)
     (import ./git.nix)
     (import ./mako.nix)
+    ./neovim
     (import ./starship.nix)
     (import ./vscode.nix)
     (import ./waybar.nix inputs)
@@ -70,7 +71,4 @@ in
       package = pkgs.gnome-themes-extra;
     };
   };
-
-  # TODO: Add an actual nvim config
-  programs.neovim.enable = true;
 }
