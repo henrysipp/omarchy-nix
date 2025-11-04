@@ -102,6 +102,55 @@ Any theme can be customized with a custom wallpaper by specifying `wallpaper_pat
 
 Generated themes automatically extract colors from the wallpaper and create a matching color scheme for all Omarchy applications (terminal, editor, launcher, etc.). 
 
+## Features
+
+### Control Menu (Super + Alt + Space)
+
+Omarchy-nix includes an enhanced control menu accessible via `Super + Alt + Space` with the following features:
+
+- **Capture**: Screenshots (region/window/monitor), screen recording, color picker
+- **Style**: Theme management, wallpaper switching, night light toggle
+- **Install**: System updates, package search, garbage collection
+- **System**: Lock/suspend/shutdown, Hyprland/Waybar restart
+- **Monitors**: Display information and configuration
+- **Audio**: Volume control, device management, mute toggle
+- **Files**: Quick access to file manager
+- **Web Apps**: Enhanced webapp launcher with installation and management
+
+### Web App Launcher
+
+The web apps feature allows you to install and manage Progressive Web Apps (PWAs) as native applications:
+
+- Install custom web apps with name, URL, and icon
+- Quick install popular apps (ChatGPT, Gmail, Spotify, etc.)
+- List and remove installed web apps
+- Launch web apps from the control menu
+
+## Advanced Configuration
+
+For more control over omarchy behavior, you can create a separate home-manager configuration file. See `examples/omarchy-home.nix` for a complete example.
+
+Key configuration options:
+
+```nix
+{
+  # Choose your color scheme
+  colorScheme = inputs.omarchy-nix.inputs.nix-colors.colorSchemes.kanagawa;
+  
+  # Enable/disable specific programs
+  programs = {
+    zoxide.enable = true;
+    zoxide.enableZshIntegration = lib.mkDefault false;  # Prevent conflicts
+    starship.enable = true;
+    btop.enable = true;
+  };
+  
+  # Override GTK theme if needed
+  gtk.theme.name = lib.mkForce "adw-gtk3";
+  gtk.theme.package = lib.mkForce pkgs.adw-gtk3;
+}
+```
+
 ## License
 
 This project is released under the MIT License, same as the original Omarchy.
